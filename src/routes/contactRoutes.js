@@ -4,6 +4,12 @@
  */
 const express = require("express");
 const contactController = require("../controllers/contactController");
+const validate = require("../middlewares/validate");
+const {
+  createContactSchema,
+  updateContactSchema,
+  contactIdSchema,
+} = require("../validations/contactValidation");
 
 const router = express.Router();
 
@@ -19,27 +25,27 @@ router.get("/", contactController.getContacts);
  * @desc    Get single contact by ID
  * @access  Public
  */
-router.get("/:id", contactController.getContact);
+router.get("/:id", validate(contactIdSchema), contactController.getContact);
 
 /**
  * @route   POST /api/contacts
  * @desc    Create a new contact
  * @access  Public
  */
-router.post("/", contactController.createContact);
+router.post("/", validate(createContactSchema), contactController.createContact);
 
 /**
  * @route   PUT /api/contacts/:id
  * @desc    Update a contact by ID
  * @access  Public
  */
-router.put("/:id", contactController.updateContact);
+router.put("/:id", validate(updateContactSchema), contactController.updateContact);
 
 /**
  * @route   DELETE /api/contacts/:id
  * @desc    Delete a contact by ID
  * @access  Public
  */
-router.delete("/:id", contactController.deleteContact);
+router.delete("/:id", validate(contactIdSchema), contactController.deleteContact);
 
 module.exports = router;

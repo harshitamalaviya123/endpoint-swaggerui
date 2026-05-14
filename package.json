@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/harshitamalaviya123/endpoint-swaggerui#readme",
   "dependencies": {
+    "@scalar/express-api-reference": "^0.9.14",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.6.2"
+    "mongoose": "^9.6.2",
+    "zod": "^4.4.3"
   }
 }

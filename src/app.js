@@ -4,6 +4,8 @@
  */
 const express = require("express");
 const cors = require("cors");
+const { apiReference } = require("@scalar/express-api-reference");
+const openApiSpec = require("./config/openapi.json");
 const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
@@ -11,6 +13,16 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// API Documentation
+app.use(
+  "/api-docs",
+  apiReference({
+    spec: {
+      content: openApiSpec,
+    },
+  })
+);
 
 // Welcome Route
 app.get("/", (req, res) => {
