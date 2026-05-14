@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "export:openapi": "node src/scripts/exportOpenApi.js",
+    "docs:gen": "npm run export:openapi && npm run gen-api --prefix documentation",
+    "docs:start": "npm start --prefix documentation"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,8 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.6.2",
-    "zod": "^4.4.3"
+    "swagger-jsdoc": "^6.2.8",
+    "zod": "^4.4.3",
+    "zod-openapi": "^5.4.6"
   }
 }

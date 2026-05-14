@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/**
+ * Clean, Minimal, Modern API Theme
+ */
+
+:root {
+  /* Elegant Blue Accent */
+  --ifm-color-primary: #0052cc;
+  --ifm-color-primary-dark: #0047b3;
+  --ifm-color-primary-darker: #0042a8;
+  --ifm-color-primary-darkest: #00368a;
+  --ifm-color-primary-light: #1a63d1;
+  --ifm-color-primary-lighter: #266bd4;
+  --ifm-color-primary-lightest: #4d86db;
+
+  /* Typography */
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Inter', system-ui, sans-serif;
+  --ifm-font-size-base: 15px;
+  --ifm-line-height-base: 1.6;
+  --ifm-code-font-family: 'JetBrains Mono', monospace;
+  --ifm-code-font-size: 90%;
+
+  /* Modern Spacing & Radii */
+  --ifm-global-radius: 12px;
+  --openapi-card-radius: 16px;
+
+  /* Pure White Backgrounds */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
+  
+  /* Sidebar and Navbar */
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: #f0f0f0;
+
+  /* Text Colors */
+  --ifm-font-color-base: #334155;
+  --ifm-heading-color: #0f172a;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.03);
+}
+
+/* Glassmorphism Navbar with subtle border */
+.navbar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #f1f5f9;
+}
+.navbar__title { font-weight: 600; letter-spacing: -0.02em; }
+
+/* Sidebar styling */
+.theme-doc-sidebar-menu {
+  font-size: 14px;
+}
+.menu__link {
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+.menu__link:hover { background: #f8fafc; color: #0f172a; }
+.menu__link--active {
+  background: #f1f5f9;
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+}
+
+/* OpenAPI Layout Adjustments */
+/* Make the right-side columns soft and blended */
+.openapi-explorer__request-panel,
+.openapi-explorer__response-panel,
+.theme-openapi-explorer-code-block {
+  border-radius: var(--openapi-card-radius) !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
+  box-shadow: none !important;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+/* Method Badges */
+.api-method > .menu__link { align-items: center; }
+.api-method.get .menu__link { color: #0ea5e9; }
+.api-method.post .menu__link { color: #10b981; }
+.api-method.put .menu__link { color: #f59e0b; }
+.api-method.delete .menu__link { color: #ef4444; }
+
+/* General Cards & Blocks */
+.card {
+  border-radius: var(--ifm-global-radius);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  background: #ffffff;
+}
+
+/* headings */
+h1, h2, h3, h4, h5 { letter-spacing: -0.02em; font-weight: 600; }
+
+/* Dark Mode Minimal */
+[data-theme='dark'] {
+  --ifm-color-primary: #3b82f6;
+  --ifm-background-color: #0f172a;
+  --ifm-background-surface-color: #1e293b;
+  --ifm-font-color-base: #cbd5e1;
+  --ifm-heading-color: #f8fafc;
+  --ifm-navbar-background-color: rgba(15, 23, 42, 0.8);
+  --ifm-toc-border-color: #334155;
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='dark'] .navbar { border-bottom: 1px solid #1e293b; }
+[data-theme='dark'] .menu__link:hover { background: #1e293b; color: #f8fafc; }
+[data-theme='dark'] .menu__link--active { background: #1e293b; }
+[data-theme='dark'] .card,
+[data-theme='dark'] .openapi-explorer__request-panel,
+[data-theme='dark'] .openapi-explorer__response-panel,
+[data-theme='dark'] .theme-openapi-explorer-code-block {
+  border-color: #334155 !important;
+  background: #1e293b !important;
+}

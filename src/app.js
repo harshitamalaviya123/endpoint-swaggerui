@@ -5,8 +5,18 @@
 const express = require("express");
 const cors = require("cors");
 const contactRoutes = require("./routes/contactRoutes");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerOptions = require("./config/openapiRegistry");
 
 const app = express();
+
+const openapiSpecification = swaggerJsdoc(swaggerOptions);
+
+// Serve OpenAPI Specification
+app.get("/openapi.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(openapiSpecification);
+});
 
 // Middleware
 app.use(cors());

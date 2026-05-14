@@ -1,3 +1,4 @@
+```json
 /**
  * Contact Routes
  * Defines comprehensive routing patterns for contact REST API endpoints.
@@ -13,8 +14,6 @@ const router = express.Router();
  * @openapi
  * /api/contacts:
  *   get:
- *     tags:
- *       - Contacts
  *     summary: Retrieve all contacts
  *     description: Returns a list of all premium contacts sorted by creation date.
  *     responses:
@@ -40,8 +39,6 @@ router.get("/", contactController.getContacts);
  * @openapi
  * /api/contacts/{id}:
  *   get:
- *     tags:
- *       - Contacts
  *     summary: Get a contact by ID
  *     parameters:
  *       - in: path
@@ -71,8 +68,6 @@ router.get("/:id", contactController.getContact);
  * @openapi
  * /api/contacts:
  *   post:
- *     tags:
- *       - Contacts
  *     summary: Create a new contact
  *     requestBody:
  *       required: true
@@ -92,8 +87,6 @@ router.post("/", validate(contactSchema), contactController.createContact);
  * @openapi
  * /api/contacts/{id}:
  *   put:
- *     tags:
- *       - Contacts
  *     summary: Update an existing contact
  *     parameters:
  *       - in: path
@@ -119,8 +112,6 @@ router.put("/:id", validate(contactSchema), contactController.updateContact);
  * @openapi
  * /api/contacts/{id}:
  *   delete:
- *     tags:
- *       - Contacts
  *     summary: Delete a contact
  *     parameters:
  *       - in: path
@@ -138,3 +129,25 @@ router.delete("/:id", contactController.deleteContact);
 
 module.exports = router;
 
+
+/**
+ * @openapi
+ * /api/contacts/{id}:
+ *   delete:
+ *     summary: Delete a contact
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Contact deleted successfully
+ *       404:
+ *         description: Contact not found
+ */
+router.delete("/:id", contactController.deleteContact);
+
+module.exports = router;
+```
