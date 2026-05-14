@@ -1,0 +1,59 @@
+/**
+ * Contact Mongoose Model
+ * Defines the strict schema and maps to the MongoDB contacts collection.
+ */
+const mongoose = require("mongoose");
+
+const contactSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: [true, "First name is required"],
+      trim: true
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last name is required"],
+      trim: true
+    },
+    email: {
+      type: String,
+      required: [true, "Email address is required"],
+      unique: true,
+      trim: true,
+      lowercase: true,
+      match: [
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+        "Please provide a valid email address"
+      ]
+    },
+    phoneNumber: {
+      type: String,
+      trim: true
+    },
+    company: {
+      type: String,
+      trim: true
+    },
+    role: {
+      type: String,
+      trim: true
+    }
+  },
+  {
+    timestamps: true, // Automatically manages createdAt and updatedAt properties
+    toJSON: {
+      transform: (doc, ret) => {
+        // Standardize returning the document ID as 'id' and clean up internals
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        return ret;
+      }
+    }
+  }
+);
+
+const Contact = mongoose.model("Contact", contactSchema);
+
+module.exports = Contact;
