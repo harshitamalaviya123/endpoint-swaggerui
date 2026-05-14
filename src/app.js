@@ -5,6 +5,7 @@
 const express = require("express");
 const cors = require("cors");
 const contactRoutes = require("./routes/contactRoutes");
+const { swaggerUi, specs } = require("./config/swagger");
 
 const app = express();
 
@@ -12,12 +13,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Swagger Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
 // Welcome Route
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Welcome to the Contacts API Endpoint Server",
     endpoints: {
+      documentation: "GET /api-docs",
       getAllContacts: "GET /api/contacts",
       getContactById: "GET /api/contacts/:id",
       createContact: "POST /api/contacts",

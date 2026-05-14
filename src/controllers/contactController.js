@@ -51,13 +51,6 @@ const getContact = async (req, res) => {
     });
   } catch (error) {
     console.error(`Error in getContact controller for ID ${req.params.id}:`, error);
-    // Determine if error is caused by a malformed MongoDB ObjectID
-    if (error.message.includes("Cast to ObjectId failed")) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid Contact ID format"
-      });
-    }
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
@@ -81,12 +74,12 @@ const createContact = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in createContact controller:", error);
-    // Catch Mongoose schema validation duplicate key or validation failures
-    if (error.message.includes("validation failed") || error.message.includes("E11000 duplicate key")) {
+    // Catch Mongoose duplicate key error (e.g. duplicate email)
+    if (error.message.includes("E11000 duplicate key")) {
       return res.status(400).json({
         success: false,
-        message: "Input validation failed",
-        error: error.message
+        message: "Duplicate key error",
+        error: "A contact with this email already exists."
       });
     }
     return res.status(500).json({
@@ -120,11 +113,11 @@ const updateContact = async (req, res) => {
     });
   } catch (error) {
     console.error(`Error in updateContact controller for ID ${req.params.id}:`, error);
-    if (error.message.includes("Cast to ObjectId failed") || error.message.includes("validation failed")) {
+    if (error.message.includes("E11000 duplicate key")) {
       return res.status(400).json({
         success: false,
-        message: "Input update constraint validation failed",
-        error: error.message
+        message: "Duplicate key error",
+        error: "A contact with this email already exists."
       });
     }
     return res.status(500).json({
@@ -159,12 +152,6 @@ const deleteContact = async (req, res) => {
     });
   } catch (error) {
     console.error(`Error in deleteContact controller for ID ${req.params.id}:`, error);
-    if (error.message.includes("Cast to ObjectId failed")) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid Contact ID format"
-      });
-    }
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
