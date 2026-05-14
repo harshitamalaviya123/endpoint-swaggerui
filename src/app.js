@@ -4,6 +4,8 @@
  */
 const express = require("express");
 const cors = require("cors");
+const redoc = require("redoc-express");
+const swaggerSpec = require("./config/swagger");
 const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
@@ -29,6 +31,36 @@ app.get("/", (req, res) => {
 
 // Mount Routes
 app.use("/api/contacts", contactRoutes);
+
+// Serve Swagger JSON
+app.get("/api-docs/swagger.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
+// Serve Redoc UI
+app.get("/docs", redoc({
+  title: "Contacts API Docs",
+  specUrl: "/api-docs/swagger.json",
+  redocOptions: {
+    theme: {
+      colors: {
+        primary: {
+          main: "#6EC5AB"
+        }
+      },
+      typography: {
+        fontFamily: `"museo-sans", "Helvetica Neue", Helvetica, Arial, sans-serif`,
+        fontSize: "15px",
+        lineHeight: "1.5",
+        code: {
+          code: "#87E8C7",
+          backgroundColor: "#4D4D4E"
+        }
+      }
+    }
+  }
+}));
 
 // Catch-all 404 handler
 app.use((req, res, next) => {
