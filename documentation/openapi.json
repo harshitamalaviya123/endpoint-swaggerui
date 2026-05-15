@@ -280,9 +280,9 @@
     "/contact/search/contact": {
       "post": {
         "tags": [
-          "External Search"
+          "CRM Contact Search"
         ],
-        "summary": "Search contact from external prospectconnect API",
+        "summary": "Search contact from CRM prospectconnect API",
         "description": "This is a standalone route for testing external API with Authorization header. It does not hit the local backend.",
         "servers": [
           {
