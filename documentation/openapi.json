@@ -107,6 +107,14 @@
         ],
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "AuthorizationHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Enter your authorization token here"
+      }
     }
   },
   "paths": {
@@ -265,6 +273,30 @@
           },
           "404": {
             "description": "Contact not found"
+          }
+        }
+      }
+    },
+    "/contact/search/contact": {
+      "post": {
+        "tags": [
+          "External Search"
+        ],
+        "summary": "Search contact from external prospectconnect API",
+        "description": "This is a standalone route for testing external API with Authorization header. It does not hit the local backend.",
+        "servers": [
+          {
+            "url": "https://api.prospectconnect.ai"
+          }
+        ],
+        "security": [
+          {
+            "AuthorizationHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results from the external API."
           }
         }
       }

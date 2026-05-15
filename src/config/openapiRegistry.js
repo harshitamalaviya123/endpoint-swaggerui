@@ -44,10 +44,20 @@ const swaggerOptions = {
         description: "Development Server",
       },
     ],
-    components: generateComponents(),
+    components: {
+      ...generateComponents(),
+      securitySchemes: {
+        AuthorizationHeader: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+          description: "Enter your authorization token here",
+        },
+      },
+    },
   },
   // Path to the API docs (routes where JSDoc annotations are located)
-  apis: ["./src/routes/*.js"], 
+  apis: ["./src/routes/*.js"],
 };
 
 module.exports = swaggerOptions;

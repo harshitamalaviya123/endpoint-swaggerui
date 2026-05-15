@@ -42,6 +42,18 @@ const sidebar: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "External Search",
+      items: [
+        {
+          type: "doc",
+          id: "api/search-contact-from-external-prospectconnect-api",
+          label: "Search contact from external prospectconnect API",
+          className: "api-method post",
+        },
+      ],
+    },
   ],
 };
 
